@@ -1,0 +1,8 @@
+{
+  "name": "@chatapp/rt-client",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vite"
+  }
+}
