@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --e-global-color-accent: #646cff;
 }
 
 a {
@@ -65,4 +67,103 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.chatbox-widget-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  border-radius: 100px;
+  height: 60px;
+  width: 60px;
+  padding: 0.1rem;
+  background-color: var(--e-global-color-accent);
+  transition: all 0.2s ease-in-out;
+}
+.chatbox-widget-btn:hover {
+  scale: 90%;
+  filter: saturate(50%);
+}
+
+#chatbox-container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background-color: #b2b2b2;
+  color: #1a1a1a;
+  padding: 1rem;
+  box-shadow: 0px 0px 3px #ddd;
+  outline: solid 1px #fff;
+  border-radius: 20px;
+  height: auto;
+  width: 100%;
+  max-width: 350px;
+}
+#chatbox-container .close-btn {
+  background-color: #242424;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  padding: 0.5rem;
+  border-radius: 100px;
+  outline: solid 1px #fff;
+}
+#chatbox-container .close-btn:hover {
+  background-color: var(--e-global-color-accent);
+}
+.chat {
+  overflow-y: auto;
+  height: auto;
+  min-height: 300px;
+  max-height: 300px;
+  margin-top: 0rem;
+  width: auto;
+}
+.chat p {
+  padding: 0.2rem 0.5rem;
+  background-color: var(--e-global-color-accent);
+  color: white;
+  margin: 0.7rem 0.1rem;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  box-shadow: 0px 0px 3px #505050;
+  width: fit-content;
+}
+.chat p::before {
+  content: "";
+}
+.chatbox-new-message-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  flex-wrap: nowrap;
+  background-color: #242424;
+  margin-top: 1rem;
+  border-radius: 200px;
+}
+.chatbox-new-message-container input[type="text"] {
+  width: 100%;
+  border-radius: 0;
+  background-color: #242424;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  outline: solid 1px #fff;
+  padding: 0.5rem;
+}
+.chatbox-new-message-container button {
+  background-color: #242424;
+  border-radius: 0;
+  border: none;
+  outline: solid 1px #fff;
+  font-size: 1rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.chatbox-new-message-container button:hover {
+  background-color: var(--e-global-color-accent);
 }

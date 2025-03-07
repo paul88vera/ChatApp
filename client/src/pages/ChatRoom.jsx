@@ -1,9 +1,20 @@
 import { useEffect, useState } from "react";
 import { db, auth } from "../firebase";
-import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
+import { IoPaperPlaneSharp } from "react-icons/io5";
+import { FaMinus } from "react-icons/fa";
+import ScrollToBottom from "react-scroll-to-bottom";
 
-const ChatRoom = () => {
+const ChatRoom = ({ close }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const navigate = useNavigate();
@@ -16,7 +27,12 @@ const ChatRoom = () => {
 
     const q = query(collection(db, "messages"), orderBy("timestamp"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      setMessages(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      setMessages(
+        snapshot.docs.map((doc) => ({
+          id: doc.displayName,
+          ...doc.data(),
+        }))
+      );
     });
 
     return () => unsubscribe();
@@ -32,24 +48,38 @@ const ChatRoom = () => {
     setNewMessage("");
   };
 
-  return (
-    <div>
-      <div className="h-64 overflow-y-auto">
-        {messages.map((msg) => (
-          <p key={msg.id}>
-            <strong>{msg.user}:</strong> {msg.text}
-          </p>
-        ))}
-      </div>
-      <input
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-        className="border p-2"
-      />
-      <button onClick={sendMessage} className="bg-green-500 px-4 py-2 text-white">
-        Send
+  return createPortal(
+    <div id="chatbox-container">
+      <button className="close-btn" onClick={close}>
+        <FaMinus />
       </button>
-    </div>
+      <div className="h-64 overflow-y-auto chat">
+        {messages == [] ? (
+          <p>"Chat with us"</p>
+        ) : (
+          messages.map((msg, index) => (
+            <p key={index}>
+              {/* <strong>{msg.user}: </strong> */}
+              <span>{msg.text}</span>
+            </p>
+          ))
+        )}
+      </div>
+      <div className="chatbox-new-message-container">
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          className="border p-2"
+        />
+        <button
+          onClick={sendMessage}
+          className="bg-green-500 px-4 py-2 text-white">
+          <IoPaperPlaneSharp />
+        </button>
+      </div>
+    </div>,
+    document.querySelector(".container")
   );
 };
 

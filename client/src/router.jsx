@@ -3,6 +3,7 @@ import RootLayout from "./layouts/RootLayout";
 import ErrorMessage from "./pages/ErrorMessage";
 import Login from "./pages/Login";
 import ChatRoom from "./pages/ChatRoom";
+import Dashboard from "./pages/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="/login" /> },
           { path: "login", children: [{ index: true, element: <Login /> }] },
-          { path: "chatroom", element: <ChatRoom /> },
+          { path: "dashboard", element: <Dashboard /> },
         ],
       },
     ],
