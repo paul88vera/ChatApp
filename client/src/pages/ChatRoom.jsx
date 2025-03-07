@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { IoPaperPlaneSharp } from "react-icons/io5";
 import { FaMinus } from "react-icons/fa";
-import ScrollToBottom from "react-scroll-to-bottom";
 
 const ChatRoom = ({ close }) => {
   const [messages, setMessages] = useState([]);
@@ -54,16 +53,17 @@ const ChatRoom = ({ close }) => {
         <FaMinus />
       </button>
       <div className="h-64 overflow-y-auto chat">
-        {messages == [] ? (
-          <p>"Chat with us"</p>
-        ) : (
-          messages.map((msg, index) => (
+        {messages.map((msg, index) => (
+          <div className="message-container" key={index}>
             <p key={index}>
               {/* <strong>{msg.user}: </strong> */}
               <span>{msg.text}</span>
             </p>
-          ))
-        )}
+            <span className="timestamp">
+              {new Date(msg.timestamp * 1000).toLocaleTimeString("en-US")}
+            </span>
+          </div>
+        ))}
       </div>
       <div className="chatbox-new-message-container">
         <input

@@ -9,7 +9,7 @@ const Login = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("/chatroom");
+        navigate("/dashboard");
       }
     });
   }, [navigate]);
@@ -17,7 +17,7 @@ const Login = () => {
   const signIn = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/chatroom");
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
     }

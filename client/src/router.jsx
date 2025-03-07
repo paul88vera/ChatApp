@@ -2,7 +2,6 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import ErrorMessage from "./pages/ErrorMessage";
 import Login from "./pages/Login";
-import ChatRoom from "./pages/ChatRoom";
 import Dashboard from "./pages/Dashboard";
 
 export const router = createBrowserRouter([
